@@ -8,6 +8,11 @@
 void print_times_table(int n)
 {
 	int i, j;
+	if (n == 0)
+	{
+		_putchar('0');
+		_putchar('\n');
+	}
 
 	if (n > 0 && n < 15)
 	{
