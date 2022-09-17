@@ -4,7 +4,7 @@
 * @n: The number to print
 *
 */
-void print_number(int n)
+void print_numbers(int n)
 {
 unsigned int num = n;
 if (n < 0)
@@ -14,7 +14,7 @@ num = -num;
 }
 if (num > 9)
 {
-print_number(num / 10);
+print_numbers(num / 10);
 }
 _putchar(num % 10 + '0');
 }
