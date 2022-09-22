@@ -1,42 +1,32 @@
-int check_seperators(char c);
+#include "main.h"
 
 /**
- * cap_string - a function that capitalizes all words of a string.
- * @s: An input string to capitalize letters
- * Return: pointer to s
+ * cap_string - take strings and capitalize words
+ * @a: string to capitalize
+ * Return: capitalized words
  */
-char *cap_string(char *s)
+
+char *cap_string(char *a)
 {
-	int i = 0;
+	int i, x;
+	char *seperators = ",;.!?\"(){} \n\t";
 
-	while (s[i])
+	for (i = 0; *(a + i) != '\0'; i++)
 	{
-		if (i == 0 && (s[i] >= 'a' && s[i] <= 'z'))
-			s[i] -= 32;
-
-		if (check_seperators(s[i]) && (s[i + 1] >= 'a' && s[i + 1] <= 'z'))
-			s[i + 1] -= 32;
-		i++;
+		if (*(a + i) >= 'a' && *(a + i) <= 'z')
+			for (x = 0; *(seperators + x) != '\0'; x++)
+			{
+				if (*(a + i - 1) == *(seperators + x))
+				{
+					*(a + i) -= 32;
+					break;
+				}
+				else if (i == 0)
+				{
+					*(a + i) -= 32;
+					break;
+				}
+			}
 	}
-
-	return (s);
-}
-
-/**
- * check_seperators - Separators of words: space, tabulation, new line,
- * ,, ;, ., !, ?, ", (, ), {, and }
- * @c: an input character
- * Return: 1 if seperator, 0 otherwise
- */
-int check_seperators(char c)
-{
-	int i = 0;
-	char seperators[13] = { ' ', '\t', '\n', ',', ';', '.', '!', '?',
-		'"', '(', ')', '{', '}' };
-	for (; i < 13; i++)
-	{
-		if (c == seperators[i])
-			return (1);
-	}
-	return (0);
+	return (a);
 }

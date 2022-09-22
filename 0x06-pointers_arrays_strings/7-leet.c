@@ -1,24 +1,25 @@
 #include "main.h"
 
 /**
- * leet - a function that encodes a string into 1337.
- * @s: an input string to encode
- * Return: An encode string
+ * leet - take strings and capitalize words
+ * @a: string to capitalize
+ * Return: capitalized words
  */
-char *leet(char *s)
+
+char *leet(char *a)
 {
-	int i = 0, j;
-	char subs[10] = {'4', '4', '3', '3', '0', '0', '7', '7', '1', '1'},
-	     str[10] = {'a', 'A', 'e', 'E', 'o', 'O', 't', 'T', 'l', 'L'};
+	int i, x;
+	char check[] = "aAeEoOtTlL";
+	char change[] = "4433007711";
 
-	while (s[i])
+	for (i = 0; *(a + i) != '\0'; i++)
 	{
-		for (j = 0; j < 10; j++)
-			if (s[i] == str[j])
-				s[i] = subs[j];
-
-		i++;
+		for (x = 0; check[x]; x++)
+			if (check[x] == *(a + i))
+			{
+				*(a + i) = change[x];
+				break;
+			}
 	}
-
-	return (s);
+	return (a);
 }
