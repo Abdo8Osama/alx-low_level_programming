@@ -1,80 +1,47 @@
 #include "dog.h"
-
-
-/**
-*_strlen - returns length of
-*a string
-*@str: string to be counted
-*Return: returns length of string
-*/
-int _strlen(char *str)
-{
-int len = 0;
-while (str)
-len++;
-
-return (len);
-}
-
+#include <stdlib.h>
 
 /**
-*_strcopy - copy string pointed by src
-*into dest variable
-*@dest:buffer storing string copy
-*@src: buffer storing string to copy
-*Return:returns copied string
-*/
-char *_strcopy(char *dest, char *src)
-{
-int index = 0;
-
-for (; src[index] ; index++)
-dest[index] = src[index];
-
-dest[index] = '\0';
-return (dest);
-}
-
-
-
-
-/**
-*new_dog - creates a new dog
-*@name: name of new dog
-*@age: age of new dog
-*@owner: owner of new dog
-*Return: returns NULL in case
-*of failure
-*/
+ * new_dog - creates a new dog structure
+ * @name: Dog's name
+ * @age: Dog's age
+ * @owner: Dog's owner
+ * Return: returns a pointer to newly created dog structure
+ */
 dog_t *new_dog(char *name, float age, char *owner)
 {
-dog_t *doggo;
+	dog_t *new_dog;
+	char *cpyname, *cpyowner;
+	int len_name = 0, len_owner = 0, i;
 
-if (name == NULL || age < 0 || owner == NULL)
-return (NULL);
+	if (name == NULL || owner == NULL)
+		return (NULL);
 
-doggo = malloc(sizeof(dog_t));
-if (doggo == NULL)
-return (NULL);
+	while (name[len_name])
+		len_name++;
+	while (owner[len_owner])
+		len_owner++;
 
-doggo->name = malloc(sizeof(char) * (_strlen(name) + 1));
-if (doggo->name == NULL)
-{
-free(doggo);
-return (NULL);
-}
+	new_dog = malloc(sizeof(dog_t));
+	if (new_dog == NULL)
+		return (NULL);
 
-doggo->owner = malloc(sizeof(char) * (_strlen(owner) + 1));
-if (doggo->owner == NULL)
-{
-free(doggo->name);
-free(doggo);
-return (NULL);
-}
+	cpyname = malloc(len_name + 1);
+	if (cpyname == NULL)
+		return (NULL);
+	for (i = 0; name[i]; i++)
+		cpyname[i] = name[i];
+	cpyname[i] = '\0';
 
-doggo->name = _strcopy(doggo->name, name);
-doggo->age = age;
-doggo->owner = _strcopy(doggo->owner, owner);
+	cpyowner = malloc(len_owner + 1);
+	if (cpyowner == NULL)
+		return (NULL);
+	for (i = 0; owner[i]; i++)
+		cpyowner[i] = owner[i];
+	cpyowner[i] = '\0';
 
-return (doggo);
+	new_dog->name = cpyname;
+	new_dog->age = age;
+	new_dog->owner = cpyowner;
+	return (new_dog);
 }
