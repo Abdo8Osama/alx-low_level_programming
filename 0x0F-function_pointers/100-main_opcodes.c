@@ -1,16 +1,16 @@
 #include <stdio.h>
+#include <string.h>
 #include <stdlib.h>
-
 /**
- * main - prints opcode of own main function
- * @argc: argument count
- * @argv: array of arguments
- * Return: 1 or 2 on fail, 0 on success
+ * main - program that prints the opcodes of its own main function.
+ * @argc: counter
+ * @argv: vector
+ * Return: Always 0 (Success)
  */
-int main(int argc, char *argv[])
+int main(int argc, char **argv)
 {
-	int bytes, i;
-	unsigned char *func_ptr;
+	int i;
+	int bytes;
 
 	if (argc != 2)
 	{
@@ -23,13 +23,13 @@ int main(int argc, char *argv[])
 		printf("Error\n");
 		exit(2);
 	}
-	func_ptr = (unsigned char *)main;
-	i = 0;
-	if (bytes > 0)
+	for (i = 0; i < bytes; i++)
 	{
-		while (i < (bytes - 1))
-			printf("%02hhx ", func_ptr[i++]);
-		printf("%hhx\n", func_ptr[i]);
+		printf("%02x", ((unsigned char *)main)[i]);
+		if (i != (bytes - 1))
+			printf(" ");
+		else
+			printf("\n");
 	}
 	return (0);
 }
