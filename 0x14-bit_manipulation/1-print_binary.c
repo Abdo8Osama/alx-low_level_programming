@@ -23,6 +23,6 @@ void print_binary(unsigned long int n)
 			_putchar('1');
 			flag = 1;
 		}
-		max >>= 1;
+		max = max >> 1;
 	}
 }
